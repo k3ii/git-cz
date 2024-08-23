@@ -17,20 +17,10 @@
 To use `git-cz`, you need to have `gum` installed. Check the [official repository](https://github.com/charmbracelet/gum/tree/main?tab=readme-ov-file#installation) for installation instructions.
 
 ## Installation
-1. Download the `git-cz` script.
 ```bash
-https://raw.githubusercontent.com/k3ii/git-cz/main/git-cz
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/k3ii/git-cz/main/git-cz)"
 ```
-2. Make the script executable.
-```bash
-chmod +x git-cz
-```
-3. Move the script to a directory in your `PATH`.
-To make the script accessible as a `git` command, move it to a directory in your `PATH`. A common choice is `/usr/local/bin`:
-```bash 
-sudo mv git-cz /usr/local/bin
-```
-4. Verify the installation.
+Verify the installation.
 ```bash
 git cz -h
 ```
