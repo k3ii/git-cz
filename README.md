@@ -49,7 +49,7 @@ git cz -a
 This command will prompt you to select a commit type, enter a scope, provide a summary, 
 and write a detailed description. It will then stage all modified and deleted files and commit them using the provided information
 
-## Conventiona Commits
+## Conventional Commits
 
 The [Conventional Commits](https://www.conventionalcommits.org/) specification is a convention for writing consistent commit messages. It helps in automating the release process, generating changelogs, and making it easier to understand the history of a project.
 
