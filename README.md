@@ -42,12 +42,37 @@ The script supports the following options:
  * -a: Automatically stage all modified and deleted files before committing. 
  * -h: Display help information and usage instructions.
 
-## Examples
-```bash
-git cz -a
-```
-This command will prompt you to select a commit type, enter a scope, provide a summary, 
+## Example
+`git cz -a`  will prompt you to select a commit type, enter a scope, provide a summary, 
 and write a detailed description. It will then stage all modified and deleted files and commit them using the provided information
+
+1. Running `git cz -a`
+The different `types` will be displayed as a list of options. You can use the arrow keys to navigate and select the desired type.
+
+![types](./images/types.png)
+
+2. Search/Filtering the `types`
+
+You can search/filter the `types` by typing the name of the type you are looking for.
+![search](./images/filter_types.png)
+
+3. After selecting the `type`, you will be prompted to enter the `scope` (optional).
+
+![scope](./images/scope.png)
+
+4. Next, you will be prompted to enter a `summary` for the commit.
+
+![summary](./images/type_scope_input.png)
+
+5. After description, you will be prompted to confirm the commit. 
+
+![confirm](./images/confirm_changes.png)
+
+6. You can see what changes are committed.
+
+![changes](./images/commit_output.png)
+
+
 
 ## Conventional Commits
 
