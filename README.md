@@ -84,3 +84,15 @@ Git has a feature called "Git command aliases" that allows it to treat any execu
 
 By naming our script `git-cz` and placing it in a directory in the PATH, we're effectively creating a new Git command `cz` that can be invoked as `git cz`.
 This approach is flexible and allows for easy installation and use across different projects without requiring project-specific configuration.
+
+## Contributing
+Feel free to improve the script to add your own commit types or make any other enhancements you think are useful. Contributions are welcome!
+
+If you would like to contribute:
+
+1. Fork the repository.
+2. Create a new branch for your feature or fix.
+3. Make your changes.
+4. Submit a pull request.
+
+Your contributions can help make this tool even more useful for everyone. Thank you for considering contributing!
