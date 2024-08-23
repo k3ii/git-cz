@@ -1,10 +1,30 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # This script is used to write a conventional commit message.
 # It prompts the user to choose the type of commit as specified in the
 # conventional commit spec. And then prompts for the summary and detailed
 # description of the message and uses the values provided. as the summary and
 # details of the message.
+
+usage() {
+  echo "Usage: $0 [-a]"
+  echo ""
+  echo "Options:"
+  echo "  -a  Automatically stage all modified and deleted files before committing."
+  echo "  -h  Show this help message and exit."
+  exit 1
+}
+
+
+# Check if the -a flag is supplied
+AUTO_STAGE=false
+while getopts "ah" flag; do
+  case "${flag}" in
+    a) AUTO_STAGE=true ;;
+    h) usage ;;
+    *) usage ;;
+  esac
+done
 
 
 TYPE=$(gum choose "build" "ci" "chore" "docs" "feat" "fix" "perf" "refactor" "revert" "style" "test")
@@ -18,4 +38,10 @@ SUMMARY=$(gum input --value "$TYPE$SCOPE: " --placeholder "Summary of this chang
 DESCRIPTION=$(gum write --placeholder "Details of this change")
 
 # Commit these changes if user confirms
-gum confirm "Commit changes?" && git commit -m "$SUMMARY" -m "$DESCRIPTION"
+if gum confirm "Commit changes?"; then
+  if [ "$AUTO_STAGE" = true ]; then
+    git commit -am "$SUMMARY" -m "$DESCRIPTION"
+  else
+    git commit -m "$SUMMARY" -m "$DESCRIPTION"
+  fi
+fi
