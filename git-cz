@@ -33,7 +33,6 @@ check_exit_status() {
   fi
 }
 
-
 TYPE=$(gum choose "build" "ci" "chore" "docs" "feat" "fix" "perf" "refactor" "revert" "style" "test")
 check_exit_status
 SCOPE=$(gum input --placeholder "scope")
@@ -48,8 +47,10 @@ check_exit_status
 DESCRIPTION=$(gum write --placeholder "Details of this change")
 check_exit_status
 
+display_text=$(printf "%s\n\n%s\n\nCommit changes?" "$SUMMARY" "$DESCRIPTION")
+
 # Commit these changes if user confirms
-if gum confirm "Commit changes?"; then
+if gum confirm "$display_text"; then
   if [ "$AUTO_STAGE" = true ]; then
     git commit -am "$SUMMARY" -m "$DESCRIPTION"
   else
