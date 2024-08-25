@@ -1,6 +1,6 @@
 # git-cz
 
-`git-cz` is a simple shell script that helps you create [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) with ease. It prompts you to select the type of commit, enter a scope (optional), and provide a summary and detailed description. The script can also automatically stage modified and deleted files before committing.
+`git-cz` is a simple shell script that helps you create [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) with ease. It prompts you to select the type of commit, enter a scope (optional), and provide a summary and detailed description. The script can also automatically stage modified and deleted tracked files before committing.
 
 ## Features
 
@@ -26,30 +26,45 @@ Verify the installation.
 ```bash
 git cz -h
 ```
-
 ## Usage
 
 The script supports the following options:
 
-- -a: Automatically stage all modified and deleted files before committing.
+- -a: Automatically stage all modified and deleted tracked files before committing.
 - -h: Display help information and usage instructions.
 
-## Examples
+## Example
 
-```bash
-git cz -a
-```
+`git cz -a`  will prompt you to select a commit type, enter a scope, provide a summary, and write a detailed description. It will then stage all modified and deleted files and commit them using the provided information
 
-This command will prompt you to select a commit type, enter a scope, provide a summary,
-and write a detailed description. It will then stage all modified and deleted files and commit them using the provided information
+1. Running `git cz -a`
+The different `types` will be displayed as a list of options. You can use the arrow keys to navigate and select the desired type.
 
-## Conventiona Commits
+    ![types](./images/types.png)
+
+2. Search/Filtering the `types`
+
+    You can search/filter the `types` by typing the name of the type you are looking for.
+    ![search](./images/filter_types.png)
+3. After selecting the `type`, you will be prompted to enter the `scope` (optional).
+    ![scope](./images/scope.png)
+4. Next, you will be prompted to enter a `summary` for the commit.  
+    ![summary](./images/type_scope_input.png)
+5. Following the `summary`, you will be prompted to enter a `description` for the commit (optional).
+    ![description](./images/description.png)
+6. After the `description`, you will be prompted to confirm the commit.
+    ![confirm](./images/confirm_changes.png)
+7. You can see what changes are committed.
+    ![changes](./images/commit_output.png)
+
+## Conventional Commits
 
 The [Conventional Commits](https://www.conventionalcommits.org/) specification is a convention for writing consistent commit messages. It helps in automating the release process, generating changelogs, and making it easier to understand the history of a project.
 
 ### Format
 
 A conventional commit message has the following format:
+
 
 ```md
 <type>(<scope>): <summary>
@@ -78,6 +93,11 @@ Git has a feature called "Git command aliases" that allows it to treat any execu
 
 By naming our script `git-cz` and placing it in a directory in the PATH, we're effectively creating a new Git command `cz` that can be invoked as `git cz`.
 This approach is flexible and allows for easy installation and use across different projects without requiring project-specific configuration.
+
+## See also
+
+- [streamich/git-cz](https://github.com/streamich/git-cz)
+- [Zhengqbbb/cz-git](https://github.com/Zhengqbbb/cz-git)
 
 ## Contributing
 
