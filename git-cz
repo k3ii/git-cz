@@ -26,16 +26,27 @@ while getopts "ah" flag; do
   esac
 done
 
+check_exit_status() {
+  if [ $? -ne 0 ]; then
+    echo "Aborted."
+    exit 1
+  fi
+}
+
 
 TYPE=$(gum choose "build" "ci" "chore" "docs" "feat" "fix" "perf" "refactor" "revert" "style" "test")
+check_exit_status
 SCOPE=$(gum input --placeholder "scope")
+check_exit_status
 
 # Since the scope is optional, wrap it in parentheses if it has a value.
 test -n "$SCOPE" && SCOPE="($SCOPE)"
 
 # Pre-populate the input with the type(scope): so that the user may change it
 SUMMARY=$(gum input --value "$TYPE$SCOPE: " --placeholder "Summary of this change")
+check_exit_status
 DESCRIPTION=$(gum write --placeholder "Details of this change")
+check_exit_status
 
 # Commit these changes if user confirms
 if gum confirm "Commit changes?"; then
