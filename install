@@ -1,0 +1,107 @@
+#!/bin/sh
+
+# Script for installing git-cz 
+#
+# This script can be executed via 
+# curl:
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/k3ii/git-cz/main/install)"
+# or wget:
+#   sh -c "$(wget -qO- https://raw.githubusercontent.com/k3ii/git-cz/main/install)"
+# or httpie:
+#   sh -c "$(http --download https://raw.githubusercontent.com/k3ii/git-cz/main/install)"
+
+status_check() {
+    if command -v git-cz 2>&1 > /dev/null; then
+        printf "\n\t%s\n" "You already have ${BOLD}git-cz${RESET} installed."
+        printf "\n\t%s\n" "Run ${BOLD}git cz${RESET} to follow conventional commits"
+        exit 0
+    fi
+}
+
+installed() {
+    cmd=$(command -v "${1}")
+    return ${?}
+}
+
+die() {
+    >&2 echo "Fatal: $*"
+    exit 1
+}
+
+check_dependencies() {
+    if ! command -v git > /dev/null 2>&1; then
+        printf "\n%s\n" "${BOLD}Can't work without git."
+        exit 1
+    fi
+    if ! command -v gum > /dev/null 2>&1; then
+        printf "\n%s\n" "${BOLD}Can't work without gum." 
+        exit 1
+    fi
+}
+
+set_permissions(){
+    if [ -f git-cz ] && ! chmod +x git-cz; then
+        printf "\n%s\n" "Unknown error while installing git-cz"
+        exit 1
+    fi
+    move_to_path
+}
+
+move_to_path(){
+    printf "%s\n" "We require some permissions to move git-cz to /usr/bin"
+
+    if ! sudo mv git-cz /usr/bin; then
+        printf "\n%s\n" "Unknown error while installing git-cz"
+        exit 1
+    fi
+}
+
+download_gitcz(){
+    git_cz_HOST="https://raw.githubusercontent.com/k3ii/git-cz/main/git-cz"
+
+    printf "\n%s\n" "Downloading git-cz from ${BOLD}$git_cz_HOST${RESET} ..."
+
+    if curl -fsSL $git_cz_HOST -o git-cz; then
+        set_permissions
+    else
+        printf "\n%s\n" "Unknown error while downloading git-cz"
+        exit 1
+    fi
+}
+
+main () {
+
+    status_check
+    check_dependencies
+    download_gitcz
+
+    printf "${BOLD}${ORANGE_FG}%s\n" ""
+    printf "%s\n" "                              "
+    printf "%s\n" "        _ _                   "
+    printf "%s\n" "   __ _(_) |_       ___ ____  "
+    printf "%s\n" "  / _\` | | __|____ / __|_  / "
+    printf "%s\n" " | (_| | | ||_____| (__ / /   "
+    printf "%s\n" "  \__, |_|\__|     \___/___|  "
+    printf "%s\n" "  |___/                       "
+    printf "${RESET}\n%s" ""
+
+    printf "\t\t%s\n" ".... is now installed!"
+    printf "\n%s" "Run ${BOLD}git cz -h${RESET} for help."
+    printf "%s\n" "                              "
+    printf "%s\n" "                              "
+
+}
+
+# check if tput exists
+if ! command -v tput > /dev/null 2>&1; then
+    # tput could not be found :(
+    BOLD=""
+    RESET=""
+    ORANGE_FG=""
+else
+    BOLD=$(tput bold)
+    RESET=$(tput sgr0)
+    ORANGE_FG=$(tput setaf 208)
+fi
+
+main

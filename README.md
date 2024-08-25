@@ -17,31 +17,15 @@ To use `git-cz`, you need to have `gum` installed. Check the [official repositor
 
 ## Installation
 
-1. Download the `git-cz` script.
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/k3ii/git-cz/main/install)"
+```
 
-    ```bash
-    https://raw.githubusercontent.com/k3ii/git-cz/main/git-cz
-    ```
+Verify the installation.
 
-2. Make the script executable.
-
-    ```bash
-    chmod +x git-cz
-    ```
-
-3. Move the script to a directory in your `PATH`.
-To make the script accessible as a `git` command, move it to a directory in your `PATH`. A common choice is `/usr/local/bin`:
-
-    ```bash
-    sudo mv git-cz /usr/local/bin
-    ```
-
-4. Verify the installation.
-
-    ```bash
-    git cz -h
-    ```
-
+```bash
+git cz -h
+```
 ## Usage
 
 The script supports the following options:
@@ -51,8 +35,7 @@ The script supports the following options:
 
 ## Example
 
-`git cz -a`  will prompt you to select a commit type, enter a scope, provide a summary,
-and write a detailed description. It will then stage all modified and deleted files and commit them using the provided information
+`git cz -a`  will prompt you to select a commit type, enter a scope, provide a summary, and write a detailed description. It will then stage all modified and deleted files and commit them using the provided information
 
 1. Running `git cz -a`
 The different `types` will be displayed as a list of options. You can use the arrow keys to navigate and select the desired type.
@@ -82,7 +65,8 @@ The [Conventional Commits](https://www.conventionalcommits.org/) specification i
 
 A conventional commit message has the following format:
 
-```sh
+
+```md
 <type>(<scope>): <summary>
 
 <body>
