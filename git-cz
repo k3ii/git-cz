@@ -7,7 +7,7 @@
 # details of the message.
 
 usage() {
-  echo "Usage: $0 [-a]"
+  echo "Usage: git cz [-a] [-h]"
   echo ""
   echo "Options:"
   echo "  -a  Automatically stage all modified and deleted files before committing."
