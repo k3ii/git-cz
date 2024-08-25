@@ -4,11 +4,11 @@
 #
 # This script can be executed via 
 # curl:
-#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/k3ii/git-cz/master/install)"
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/k3ii/git-cz/main/install)"
 # or wget:
-#   sh -c "$(wget -qO- https://raw.githubusercontent.com/k3ii/git-cz/master/install)"
+#   sh -c "$(wget -qO- https://raw.githubusercontent.com/k3ii/git-cz/main/install)"
 # or httpie:
-#   sh -c "$(http --download https://raw.githubusercontent.com/k3ii/git-cz/master/install)"
+#   sh -c "$(http --download https://raw.githubusercontent.com/k3ii/git-cz/main/install)"
 
 status_check() {
     if command -v git-cz 2>&1 > /dev/null; then
