@@ -1,6 +1,5 @@
 # git-cz
 
-
 `git-cz` is a simple shell script that helps you create [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) with ease. It prompts you to select the type of commit, enter a scope (optional), and provide a summary and detailed description. The script can also automatically stage modified and deleted files before committing.
 
 ## Features
@@ -17,62 +16,63 @@
 To use `git-cz`, you need to have `gum` installed. Check the [official repository](https://github.com/charmbracelet/gum/tree/main?tab=readme-ov-file#installation) for installation instructions.
 
 ## Installation
+
 1. Download the `git-cz` script.
-```bash
-https://raw.githubusercontent.com/k3ii/git-cz/main/git-cz
-```
+
+    ```bash
+    https://raw.githubusercontent.com/k3ii/git-cz/main/git-cz
+    ```
+
 2. Make the script executable.
-```bash
-chmod +x git-cz
-```
+
+    ```bash
+    chmod +x git-cz
+    ```
+
 3. Move the script to a directory in your `PATH`.
 To make the script accessible as a `git` command, move it to a directory in your `PATH`. A common choice is `/usr/local/bin`:
-```bash 
-sudo mv git-cz /usr/local/bin
-```
+
+    ```bash
+    sudo mv git-cz /usr/local/bin
+    ```
+
 4. Verify the installation.
-```bash
-git cz -h
-```
+
+    ```bash
+    git cz -h
+    ```
 
 ## Usage
 
 The script supports the following options:
 
- * -a: Automatically stage all modified and deleted files before committing. 
- * -h: Display help information and usage instructions.
+- -a: Automatically stage all modified and deleted files before committing.
+- -h: Display help information and usage instructions.
 
 ## Example
-`git cz -a`  will prompt you to select a commit type, enter a scope, provide a summary, 
+
+`git cz -a`  will prompt you to select a commit type, enter a scope, provide a summary,
 and write a detailed description. It will then stage all modified and deleted files and commit them using the provided information
 
 1. Running `git cz -a`
 The different `types` will be displayed as a list of options. You can use the arrow keys to navigate and select the desired type.
 
-![types](./images/types.png)
+    ![types](./images/types.png)
 
 2. Search/Filtering the `types`
 
-You can search/filter the `types` by typing the name of the type you are looking for.
-![search](./images/filter_types.png)
-
+    You can search/filter the `types` by typing the name of the type you are looking for.
+    ![search](./images/filter_types.png)
 3. After selecting the `type`, you will be prompted to enter the `scope` (optional).
-
-![scope](./images/scope.png)
-
-4. Next, you will be prompted to enter a `summary` for the commit.
-
-![summary](./images/type_scope_input.png)
-
-5. After description, you will be prompted to confirm the commit. 
-
-![confirm](./images/confirm_changes.png)
-
-6. You can see what changes are committed.
-
-![changes](./images/commit_output.png)
-
-
+    ![scope](./images/scope.png)
+4. Next, you will be prompted to enter a `summary` for the commit.  
+    ![summary](./images/type_scope_input.png)
+5. Following the `summary`, you will be prompted to enter a `description` for the commit (optional).
+    ![description](./images/description.png)
+6. After the `description`, you will be prompted to confirm the commit.
+    ![confirm](./images/confirm_changes.png)
+7. You can see what changes are committed.
+    ![changes](./images/commit_output.png)
 
 ## Conventional Commits
 
@@ -82,24 +82,24 @@ The [Conventional Commits](https://www.conventionalcommits.org/) specification i
 
 A conventional commit message has the following format:
 
-```
+```sh
 <type>(<scope>): <summary>
 
 <body>
 ```
 
- * `type`: The type of change being committed, e.g., feat, fix, docs, etc.
- * `scope` (optional): The part of the codebase that is being affected.
- * `summary`: A brief summary of the change.
- * `body` (optional): A detailed description of the change.
+- `type`: The type of change being committed, e.g., feat, fix, docs, etc.
+- `scope` (optional): The part of the codebase that is being affected.
+- `summary`: A brief summary of the change.
+- `body` (optional): A detailed description of the change.
 
 Benefits
 
- * Automated Changelog: By following a consistent commit message format, tools can automatically generate changelogs.
- * Better Collaboration: It makes it easier for teams to understand the nature of changes in the codebase.
- * Semantic Versioning: Helps in determining the version of the project automatically based on the types of commits.
+- Automated Changelog: By following a consistent commit message format, tools can automatically generate changelogs.
+- Better Collaboration: It makes it easier for teams to understand the nature of changes in the codebase.
+- Semantic Versioning: Helps in determining the version of the project automatically based on the types of commits.
 
- ## How Git Picks Up git-cz
+## How Git Picks Up git-cz
 
 Git has a feature called "Git command aliases" that allows it to treat any executable file named `git-<command>` in your `PATH` as a Git subcommand. This is how `git-cz` works:
 
@@ -111,6 +111,7 @@ By naming our script `git-cz` and placing it in a directory in the PATH, we're e
 This approach is flexible and allows for easy installation and use across different projects without requiring project-specific configuration.
 
 ## Contributing
+
 Feel free to improve the script to add your own commit types or make any other enhancements you think are useful. Contributions are welcome!
 
 If you would like to contribute:
