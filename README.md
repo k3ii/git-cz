@@ -1,6 +1,6 @@
 # git-cz
 
-`git-cz` is a simple shell script that helps you create [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) with ease. It prompts you to select the type of commit, enter a scope (optional), and provide a summary and detailed description. The script can also automatically stage modified and deleted files before committing.
+`git-cz` is a simple shell script that helps you create [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) with ease. It prompts you to select the type of commit, enter a scope (optional), and provide a summary and detailed description. The script can also automatically stage modified and deleted tracked files before committing.
 
 ## Features
 
@@ -46,7 +46,7 @@ To make the script accessible as a `git` command, move it to a directory in your
 
 The script supports the following options:
 
-- -a: Automatically stage all modified and deleted files before committing.
+- -a: Automatically stage all modified and deleted tracked files before committing.
 - -h: Display help information and usage instructions.
 
 ## Example
@@ -109,6 +109,11 @@ Git has a feature called "Git command aliases" that allows it to treat any execu
 
 By naming our script `git-cz` and placing it in a directory in the PATH, we're effectively creating a new Git command `cz` that can be invoked as `git cz`.
 This approach is flexible and allows for easy installation and use across different projects without requiring project-specific configuration.
+
+## See also
+
+- [streamich/git-cz](https://github.com/streamich/git-cz)
+- [Zhengqbbb/cz-git](https://github.com/Zhengqbbb/cz-git)
 
 ## Contributing
 
