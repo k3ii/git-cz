@@ -1,0 +1,8 @@
+[package]
+name = "git-cz"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+promkit = "0.4.5"
+git2 = "0.19.0"
