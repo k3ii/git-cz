@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🚀 Features
+
+- *(git-cz)* Display commit information
+
+### 🐛 Bug Fixes
+
+- *(git-cz)* Get ctrl+c to work
+- *(git-cz)* Correct usage message
+
+### 📚 Documentation
+
+- *(install)* Wrong script choose to install
+- *(readme.md)* Updated the images dimensions in example
+- *(README)* Update examples to include image
+- *(images)* Add image examples
+- *(README)* Fix heading typo conventiona -> conventional
+
+### Docs
+
+- *(README)* Update installation instruction
+
 ## [1.0.0] - 2024-08-23
 
 ### 🚀 Features

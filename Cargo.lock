@@ -113,7 +113,7 @@ dependencies = [
 
 [[package]]
 name = "git-cz"
-version = "0.1.0"
+version = "0.1.0-rc.1"
 dependencies = [
  "git2",
  "promkit",
