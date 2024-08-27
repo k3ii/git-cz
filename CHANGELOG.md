@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.0-rc.1] - 2024-08-27
+
+### 🚜 Refactor
+
+- *(git-cz)* Rewrite git-cz in Rust 
+- *(git-cz)* Rewrite git-cz in a more modular way
+
+### 🧪 Testing
+
+- *(git-cz)* Add testing
+
+### ⚙️ Miscellaneous Tasks
+
+- *(cargo)* Add cargo-dist CI
+- *(cargo)* Add description and repo
+- *(cargo)* Bump version to 0.1.0-rc.1
+- *(Cargo)* Add dependencies and dev-dependencies
+
+
 ## [unreleased]
 
 ### 🚀 Features
@@ -25,7 +44,7 @@ All notable changes to this project will be documented in this file.
 
 - *(README)* Update installation instruction
 
-## [1.0.0] - 2024-08-23
+## [0.1.0] - 2024-08-23
 
 ### 🚀 Features
 
