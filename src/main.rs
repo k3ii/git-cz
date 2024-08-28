@@ -43,12 +43,41 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let description = description_input.run()?;
         let body = body_input.run()?;
 
-        let full_commit_message = build_commit_message(&commit_type, &scope, &description, &body);
+        // New footer confirmation prompt
+        let mut footer_confirm = Confirm::new("Do you want to add a footer?").prompt()?;
+        let footer = if footer_confirm.run()?.to_lowercase() == "y" {
+            let mut footer_type_input = QuerySelector::new(
+                vec!["fix".to_string(), "close".to_string()],
+                |text, items| -> Vec<String> {
+                    items
+                        .iter()
+                        .filter(|item| item.contains(text))
+                        .cloned()
+                        .collect()
+                },
+            )
+            .title("Select the footer type:")
+            .listbox_lines(2)
+            .prompt()?;
+
+            let mut issue_number_input = Readline::default()
+                .title("Enter the issue number:")
+                .prompt()?;
+
+            let footer_type = footer_type_input.run()?;
+            let issue_number = issue_number_input.run()?;
+            format!("{}: #{}", footer_type, issue_number)
+        } else {
+            String::new()
+        };
+
+        let full_commit_message =
+            build_commit_message(&commit_type, &scope, &description, &body, &footer);
 
         let mut confirm_input =
             Confirm::new("Do you want to proceed with this commit?").prompt()?;
         let confirm = confirm_input.run()?;
-        if confirm.trim().to_lowercase() == "yes" || confirm.trim().to_lowercase() == "y" {
+        if confirm.to_lowercase() == "y" {
             perform_commit(Path::new("."), &full_commit_message)?;
             println!("Commit successful!");
         } else {
