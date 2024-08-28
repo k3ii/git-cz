@@ -1,61 +1,22 @@
 # git-cz
 
-`git-cz` is a simple shell script that helps you create [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) with ease. It prompts you to select the type of commit, enter a scope (optional), and provide a summary and detailed description. The script can also automatically stage modified and deleted tracked files before committing.
+`git-cz` is a simple commitizen tool written in rust.
+
+`git-cz` helps you create [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) with ease. 
+It prompts you to select the type of commit, enter a scope (optional), and provide a summary and detailed description. 
+
+![demo](./assets/demo.gif)
 
 ## Features
 
 - Prompts for commit type, scope, summary, and detailed description.
-- Supports the `-a` flag to automatically stage modified and deleted files before committing.
 
-## Dependencies
-
-- **[Gum](https://github.com/charmbracelet/gum)**: A tool to make shell scripts more interactive. This script relies on `gum` to present choices and prompt for input.
-
-### Installing Gum
-
-To use `git-cz`, you need to have `gum` installed. Check the [official repository](https://github.com/charmbracelet/gum/tree/main?tab=readme-ov-file#installation) for installation instructions.
 
 ## Installation
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/k3ii/git-cz/main/install)"
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/k3ii/git-cz/releases/download/0.1.0-rc.1/git-cz-installer.sh | sh
 ```
-
-Verify the installation.
-
-```bash
-git cz -h
-```
-## Usage
-
-The script supports the following options:
-
-- -a: Automatically stage all modified and deleted tracked files before committing.
-- -h: Display help information and usage instructions.
-
-## Example
-
-`git cz -a`  will prompt you to select a commit type, enter a scope, provide a summary, and write a detailed description. It will then stage all modified and deleted files and commit them using the provided information
-
-1. Running `git cz -a`
-The different `types` will be displayed as a list of options. You can use the arrow keys to navigate and select the desired type.
-
-    ![types](./images/types.png)
-
-2. Search/Filtering the `types`
-
-    You can search/filter the `types` by typing the name of the type you are looking for.
-    ![search](./images/filter_types.png)
-3. After selecting the `type`, you will be prompted to enter the `scope` (optional).
-    ![scope](./images/scope.png)
-4. Next, you will be prompted to enter a `summary` for the commit.  
-    ![summary](./images/type_scope_input.png)
-5. Following the `summary`, you will be prompted to enter a `description` for the commit (optional).
-    ![description](./images/description.png)
-6. After the `description`, you will be prompted to confirm the commit.
-    ![confirm](./images/confirm_changes.png)
-7. You can see what changes are committed.
-    ![changes](./images/commit_output.png)
 
 ## Conventional Commits
 
