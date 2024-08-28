@@ -49,6 +49,7 @@ pub fn build_commit_message(
     scope: &str,
     description: &str,
     body: &str,
+    footer: &str,
 ) -> String {
     let message = format!(
         "{}{}: {}",
@@ -61,11 +62,17 @@ pub fn build_commit_message(
         description
     );
 
-    if body.is_empty() {
-        message
-    } else {
-        format!("{}\n\n{}", message, body) // Two newlines before the body if it's not empty
+    let mut full_message = message;
+
+    if !body.is_empty() {
+        full_message.push_str(&format!("\n\n{}", body));
     }
+
+    if !footer.is_empty() {
+        full_message.push_str(&format!("\n\n{}", footer));
+    }
+
+    full_message
 }
 
 pub fn perform_commit(repo_path: &Path, full_commit_message: &str) -> Result<(), Box<dyn Error>> {
