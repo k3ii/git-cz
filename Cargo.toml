@@ -1,5 +1,5 @@
 [package]
-name = "git-cz"
+name = "git-commitizen"
 version = "0.1.0-rc.1"
 edition = "2021"
 description = "A simple commitizen CLI tool in rust"
@@ -12,6 +12,11 @@ promkit = "0.4.5"
 
 [dev-dependencies]
 tempfile = "3.2"
+
+[[bin]]
+name = "git-cz"
+path = "src/main.rs"
+
 
 # The profile that 'cargo dist' will build with
 [profile.dist]
