@@ -4,6 +4,7 @@ version = "0.1.0-rc.1"
 edition = "2021"
 description = "A simple commitizen CLI tool in rust"
 repository = "https://github.com/k3ii/git-cz"
+license-file = "LICENSE"
 
 [dependencies]
 git2 = "0.19.0"
