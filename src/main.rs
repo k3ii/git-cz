@@ -1,4 +1,6 @@
-use git_cz::{build_commit_message, build_commit_types, format_commit_types, perform_commit};
+use git_commitizen::{
+    build_commit_message, build_commit_types, format_commit_types, perform_commit,
+};
 use promkit::preset::query_selector::QuerySelector;
 use promkit::{preset::confirm::Confirm, preset::readline::Readline, suggest::Suggest};
 use std::path::Path;

@@ -1,6 +1,8 @@
 use git2::Repository;
 use git2::Signature;
-use git_cz::{build_commit_message, build_commit_types, format_commit_types, perform_commit};
+use git_commitizen::{
+    build_commit_message, build_commit_types, format_commit_types, perform_commit,
+};
 use std::path::Path;
 use tempfile;
 
