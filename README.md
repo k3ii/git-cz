@@ -15,8 +15,12 @@ It prompts you to select the type of commit, enter a scope (optional), and provi
 ## Installation
 
 ```bash
-curl --proto '=https' --tlsv1.2 -LsSf https://github.com/k3ii/git-cz/releases/download/0.1.0-rc.1/git-cz-installer.sh | sh
+cargo install git-commitizen
 ```
+> [!NOTE]
+> Although the package is called `git-commitizen` on crates.io, the installed binary is named `git-cz`:
+
+Check [releases](https://github.com/k3ii/git-cz/releases) for pre-built binaries or compiled binary for your platform.
 
 ## Conventional Commits
 
@@ -31,12 +35,15 @@ A conventional commit message has the following format:
 <type>(<scope>): <summary>
 
 <body>
+
+<footer>
 ```
 
 - `type`: The type of change being committed, e.g., feat, fix, docs, etc.
 - `scope` (optional): The part of the codebase that is being affected.
 - `summary`: A brief summary of the change.
 - `body` (optional): A detailed description of the change.
+- `footer` (optional): A footer section that can contain additional information about issues fixed or closed. 
 
 Benefits
 
