@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.0-rc.2] - 2024-08-28
+
+### 🚀 Features
+
+- *(git-cz)* Add optional footer prompt
+- *(cargo-dist)* Install prebuilt binaries via homebrew
+- *(cargo-dist)* Install prebuilt binaries via powershell
+
+### 🐛 Bug Fixes
+
+- *(cargo)* Add openssl as a vendored dependencies
+
+### 🚜 Refactor
+
+- Rename module in main.rs and test_main.rs
+
+### 📚 Documentation
+
+- *(README)* Add shell installation
+- Add assets
+
+### ⚙️ Miscellaneous Tasks
+
+- *(cargo)* Bump rc version
+- *(cargo)* Rename package-name and add bin section
+- *(cargo)* Add license-file
+
 ## [0.1.0-rc.1] - 2024-08-27
 
 ### 🚜 Refactor
@@ -23,9 +50,15 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+The unreleased version was a bash script with gum.
+You can find the bash script [here](https://github.com/k3ii/git-cz/blob/30f8aae0fbe0516af81b948201d29a5877d0a95e/git-cz).
+
 ### 🚀 Features
 
 - *(git-cz)* Display commit information
+- *(git-cz)* Add option to automatically stage files
+- *(git-cz)* Add more types
+- *(git-cz)* Add initial git-cz
 
 ### 🐛 Bug Fixes
 
@@ -39,23 +72,10 @@ All notable changes to this project will be documented in this file.
 - *(README)* Update examples to include image
 - *(images)* Add image examples
 - *(README)* Fix heading typo conventiona -> conventional
-
-### Docs
-
-- *(README)* Update installation instruction
-
-## [0.1.0] - 2024-08-23
-
-### 🚀 Features
-
-- *(git-cz)* Add option to automatically stage files
-- *(git-cz)* Add more types
-- *(git-cz)* Add initial git-cz
-
-### 📚 Documentation
-
 - *(README)* Add contributing section
 - *(README)* Update README with installation instruction
+- *(README)* Update installation instruction
+
 
 ### ⚙️ Miscellaneous Tasks
 
