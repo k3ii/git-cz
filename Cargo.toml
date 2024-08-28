@@ -2,13 +2,19 @@
 name = "git-commitizen"
 version = "0.1.0-rc.1"
 edition = "2021"
+authors = ["Jain Ramchurn"]
 description = "A simple commitizen CLI tool in rust"
+homepage ="https://github.com/k3ii/git-cz"
 repository = "https://github.com/k3ii/git-cz"
 license-file = "LICENSE"
+readme = "README.md"
+keywords = ["git", "commitizen", "cli", "rust"]
+categories = ["development-tools", "cli"]
 
 [dependencies]
 git2 = "0.19.0"
 promkit = "0.4.5"
+openssl = { version = "0.10", features = ["vendored"] }
 
 [dev-dependencies]
 tempfile = "3.2"
@@ -30,10 +36,14 @@ cargo-dist-version = "0.21.1"
 # CI backends to support
 ci = "github"
 # The installers to generate for each app
-installers = ["shell"]
+installers = ["shell", "powershell", "homebrew"]
 # Target platforms to build apps for (Rust target-triple syntax)
-targets = ["x86_64-apple-darwin", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-msvc"]
+targets = ["aarch64-apple-darwin", "x86_64-apple-darwin", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-msvc"]
 # Path that installers should place binaries in
 install-path = "CARGO_HOME"
 # Whether to install an updater program
 install-updater = true
+# A GitHub repo to push Homebrew formulas to
+tap = "k3ii/homebrew-tap"
+# Publish jobs to run in CI
+publish-jobs = ["homebrew"]
