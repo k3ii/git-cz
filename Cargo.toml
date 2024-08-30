@@ -9,7 +9,7 @@ repository = "https://github.com/k3ii/git-cz"
 license-file = "LICENSE"
 readme = "README.md"
 keywords = ["git", "commitizen", "cli", "rust"]
-categories = ["development-tools", "cli"]
+categories = ["development-tools"]
 
 [dependencies]
 git2 = "0.19.0"
