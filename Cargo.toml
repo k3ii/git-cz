@@ -45,7 +45,9 @@ install-path = "CARGO_HOME"
 install-updater = true
 # A GitHub repo to push Homebrew formulas to
 tap = "k3ii/homebrew-tap"
-# The name of the Homebrew formula to generate
+# Customize the Homebrew formula name
 formula = "git-cz"
 # Publish jobs to run in CI
 publish-jobs = ["homebrew"]
+# Whether to install an updater program
+install-updater = true
