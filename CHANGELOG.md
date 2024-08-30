@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.0-rc.3] - 2024-08-30
+
+### 🐛 Bug Fixes
+
+- *(cargo)* Override formula name
+
+### 📚 Documentation
+
+- *(README)* Add cargo installation instruction
+- *(changelog)* Revise changelog
+
+### ⚙️ Miscellaneous Tasks
+
+- *(git-cz)* Remove bash git-cz and install script
+
 ## [0.1.0-rc.2] - 2024-08-28
 
 ### 🚀 Features
