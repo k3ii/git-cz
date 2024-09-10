@@ -32,10 +32,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .prompt()?;
 
     let mut description_input = Readline::default()
-        .title("Write a SHORT, IMPERATIVE tense description of the change:")
+        .title("Write a short, imperative tense description of the change:")
         .prompt()?;
     let mut body_input = Readline::default()
-        .title("Provide a LONGER description of the change:")
+        .title("Provide a longer description of the change(press 'e' to open editor):")
         .prompt()?;
 
     let selection = p.run()?;
