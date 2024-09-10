@@ -3,7 +3,10 @@ use git_commitizen::{
 };
 use promkit::preset::query_selector::QuerySelector;
 use promkit::{preset::confirm::Confirm, preset::readline::Readline, suggest::Suggest};
+use std::env;
 use std::path::Path;
+use std::process::Command;
+use tempfile;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let commit_types = build_commit_types();
@@ -42,6 +45,34 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let scope = scope_input.run()?;
         let description = description_input.run()?;
         let body = body_input.run()?;
+
+        let body = if body.trim().to_lowercase() == "e" {
+            // Create a temporary file
+            let temp_file = tempfile::NamedTempFile::new()?;
+            let temp_path = temp_file
+                .path()
+                .to_str()
+                .expect("Failed to get temp file path");
+
+            // Determine the editor command
+            let editor_command = if cfg!(target_os = "windows") {
+                env::var("EDITOR").unwrap_or_else(|_| "notepad".to_string())
+            } else {
+                env::var("EDITOR").unwrap_or_else(|_| "vim".to_string())
+            };
+
+            // Open the editor
+            let status = Command::new(&editor_command).arg(temp_path).status()?;
+
+            if !status.success() {
+                eprintln!("Editor exited with non-zero status");
+            }
+
+            // Read the contents of the temp file
+            std::fs::read_to_string(temp_path)?
+        } else {
+            body
+        };
 
         // New footer confirmation prompt
         let mut footer_confirm = Confirm::new("Do you want to add a footer?").prompt()?;
