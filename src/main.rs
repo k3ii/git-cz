@@ -93,6 +93,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             let mut issue_number_input = Readline::default()
                 .title("Enter the issue number:")
+                .validator(
+                    |text| text.trim().parse::<i32>().is_ok(),
+                    |text| format!("'{}' is not a valid integer", text),
+                )
                 .prompt()?;
 
             let footer_type = footer_type_input.run()?;
