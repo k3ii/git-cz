@@ -1,6 +1,6 @@
 [package]
 name = "git-commitizen"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Jain Ramchurn"]
 description = "A simple commitizen CLI tool in rust"
@@ -50,3 +50,5 @@ tap = "k3ii/homebrew-tap"
 formula = "git-cz"
 # Publish jobs to run in CI
 publish-jobs = ["homebrew"]
+# Ignore out-of-date contents
+allow-dirty = ["ci"]
