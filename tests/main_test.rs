@@ -74,27 +74,31 @@ fn test_build_commit_message() {
     let scope = "ui";
     let description = "Add new button";
     let body = "This button allows users to submit the form.";
+    let footer = "Co-authored-by: John Doe <john.doe@example.com>";
 
-    let commit_message = build_commit_message(commit_type, scope, description, body);
+    let commit_message = build_commit_message(commit_type, scope, description, body, footer);
     assert_eq!(
         commit_message,
-        "feat(ui): Add new button\n\nThis button allows users to submit the form."
+        "feat(ui): Add new button\n\nThis button allows users to submit the form.\n\nCo-authored-by: John Doe <john.doe@example.com>"
     );
 
-    let commit_message_no_scope = build_commit_message(commit_type, "", description, body);
+    let commit_message_no_scope = build_commit_message(commit_type, "", description, body, footer);
     assert_eq!(
         commit_message_no_scope,
-        "feat: Add new button\n\nThis button allows users to submit the form."
+        "feat: Add new button\n\nThis button allows users to submit the form.\n\nCo-authored-by: John Doe <john.doe@example.com>"
     );
 
-    let commit_message_no_body = build_commit_message(commit_type, scope, description, "");
-    assert_eq!(commit_message_no_body, "feat(ui): Add new button");
+    let commit_message_no_body = build_commit_message(commit_type, scope, description, "", footer);
+    assert_eq!(commit_message_no_body, "feat(ui): Add new button\n\nCo-authored-by: John Doe <john.doe@example.com>");
+
+    let commit_message_no_footer = build_commit_message(commit_type, scope, description, body, "");
+    assert_eq!(commit_message_no_footer, "feat(ui): Add new button\n\nThis button allows users to submit the form.");
 }
 
 #[test]
 fn test_build_commit_message_edge_cases() {
     // All empty strings
-    let empty_message = build_commit_message("", "", "", "");
+    let empty_message = build_commit_message("", "", "", "", "");
     assert_eq!(empty_message, ": ", "Empty inputs should result in ': '");
 
     // Very long strings
@@ -102,15 +106,16 @@ fn test_build_commit_message_edge_cases() {
     let long_scope = "b".repeat(50);
     let long_description = "c".repeat(100);
     let long_body = "d".repeat(1000);
+    let long_footer = "e".repeat(1000);
 
-    let long_message = build_commit_message(&long_type, &long_scope, &long_description, &long_body);
+    let long_message = build_commit_message(&long_type, &long_scope, &long_description, &long_body, &long_footer);
     assert!(long_message.starts_with(&format!("{}({}):", long_type, long_scope)));
     assert!(long_message.contains(&long_description));
     assert!(long_message.contains(&long_body));
 
     // Special characters
-    let special_message = build_commit_message("type!", "scope@", "description#", "body$");
-    assert_eq!(special_message, "type!(scope@): description#\n\nbody$");
+    let special_message = build_commit_message("type!", "scope@", "description#", "body$", "footer^&");
+    assert_eq!(special_message, "type!(scope@): description#\n\nbody$\n\nfooter^&");
 }
 
 #[test]
@@ -248,8 +253,9 @@ fn test_full_workflow() {
     let scope = "user-interface";
     let description = "Add new feature";
     let body = "This commit adds a new feature to improve user experience.";
+    let footer = "Co-authored-by: John Doe <john.doe@example.com>";
 
-    let commit_message = build_commit_message(commit_type, scope, description, body);
+    let commit_message = build_commit_message(commit_type, scope, description, body, footer);
 
     // Perform the commit
     perform_commit(temp_dir.path(), &commit_message).unwrap();
