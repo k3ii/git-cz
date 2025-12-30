@@ -2,13 +2,13 @@ use git_commitizen::{
     build_commit_message, build_commit_types, format_commit_types, perform_commit,
 };
 use promkit::preset::query_selector::QuerySelector;
-use promkit::{preset::confirm::Confirm, preset::readline::Readline, suggest::Suggest};
+use promkit::{Prompt, preset::confirm::Confirm, preset::readline::Readline, suggest::Suggest};
 use std::env;
 use std::path::Path;
 use std::process::Command;
-use tempfile;
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let commit_types = build_commit_types();
     let commit_types_display = format_commit_types(commit_types);
 
@@ -20,31 +20,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .collect()
     })
     .title("Select the type of change that you're committing:")
-    .listbox_lines(10)
-    .prompt()?;
+    .listbox_lines(10);
 
     let mut scope_input = Readline::default()
         .title("Denote the scope of this change (optional):")
         .enable_suggest(Suggest::from_iter([
             "app", "core", "ui", "db", "api", "frontend", "backend", "config", "build", "sec",
             "infra", "deps",
-        ]))
-        .prompt()?;
+        ]));
 
-    let mut description_input = Readline::default()
-        .title("Write a short, imperative tense description of the change:")
-        .prompt()?;
+    let mut description_input =
+        Readline::default().title("Write a short, imperative tense description of the change:");
     let mut body_input = Readline::default()
-        .title("Provide a longer description of the change(press 'e' to open editor):")
-        .prompt()?;
+        .title("Provide a longer description of the change(press 'e' to open editor):");
 
-    let selection = p.run()?;
+    let selection = p.run().await?;
     let selected_type = selection.split_whitespace().next();
 
     if let Some(commit_type) = selected_type {
-        let scope = scope_input.run()?;
-        let description = description_input.run()?;
-        let body = body_input.run()?;
+        let scope = scope_input.run().await?;
+        let description = description_input.run().await?;
+        let body = body_input.run().await?;
 
         let body = if body.trim().to_lowercase() == "e" {
             // Create a temporary file
@@ -75,8 +71,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         };
 
         // New footer confirmation prompt
-        let mut footer_confirm = Confirm::new("Do you want to add a footer?").prompt()?;
-        let footer = if footer_confirm.run()?.to_lowercase() == "y" {
+        let mut footer_confirm = Confirm::new("Do you want to add a footer?");
+        let footer = if footer_confirm.run().await?.to_lowercase() == "y" {
             let mut footer_type_input = QuerySelector::new(
                 vec!["fix".to_string(), "close".to_string()],
                 |text, items| -> Vec<String> {
@@ -88,30 +84,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 },
             )
             .title("Select the footer type:")
-            .listbox_lines(2)
-            .prompt()?;
+            .listbox_lines(2);
 
             let mut issue_number_input = Readline::default()
                 .title("Enter the issue number:")
                 .validator(
                     |text| text.trim().parse::<i32>().is_ok(),
                     |text| format!("'{}' is not a valid integer", text),
-                )
-                .prompt()?;
+                );
 
-            let footer_type = footer_type_input.run()?;
-            let issue_number = issue_number_input.run()?;
+            let footer_type = footer_type_input.run().await?;
+            let issue_number = issue_number_input.run().await?;
             format!("{}: #{}", footer_type, issue_number)
         } else {
             String::new()
         };
 
         let full_commit_message =
-            build_commit_message(&commit_type, &scope, &description, &body, &footer);
+            build_commit_message(commit_type, &scope, &description, &body, &footer);
 
-        let mut confirm_input =
-            Confirm::new("Do you want to proceed with this commit?").prompt()?;
-        let confirm = confirm_input.run()?;
+        let mut confirm_input = Confirm::new("Do you want to proceed with this commit?");
+        let confirm = confirm_input.run().await?;
         if confirm.to_lowercase() == "y" {
             perform_commit(Path::new("."), &full_commit_message)?;
             println!("Commit successful!");
