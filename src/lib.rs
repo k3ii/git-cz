@@ -76,7 +76,7 @@ pub fn build_commit_message(
 }
 
 pub fn perform_commit(repo_path: &Path, full_commit_message: &str) -> Result<(), Box<dyn Error>> {
-    let repo = Repository::open(repo_path)?;
+    let repo = Repository::discover(repo_path)?;
 
     let statuses = repo.statuses(None)?;
     if statuses.is_empty() {
@@ -99,7 +99,7 @@ pub fn perform_commit(repo_path: &Path, full_commit_message: &str) -> Result<(),
         Some("HEAD"),
         &sig,
         &sig,
-        &full_commit_message,
+        full_commit_message,
         &tree,
         &[&parent_commit],
     )?;

@@ -1,29 +1,29 @@
 [package]
 name = "git-commitizen"
-version = "0.1.1"
-edition = "2021"
-authors = ["Jain Ramchurn"]
+version = "0.2.0"
+edition = "2024"
+authors = ["Pierre Mavro", "Jain Ramchurn"]
 description = "A simple commitizen CLI tool in rust"
-homepage ="https://github.com/k3ii/git-cz"
-repository = "https://github.com/k3ii/git-cz"
+homepage ="https://github.com/deimosfr/git-cz"
+repository = "https://github.com/deimosfr/git-cz"
 license-file = "LICENSE"
 readme = "README.md"
 keywords = ["git", "commitizen", "cli", "rust"]
 categories = ["development-tools"]
 
 [dependencies]
-git2 = "0.19.0"
-promkit = "0.4.5"
-openssl = { version = "0.10", features = ["vendored"] }
-tempfile = "3.2"
+git2 = "0.20.3"
+promkit = { version = "0.10.1", features = ["query-selector", "confirm", "readline"] }
+openssl = { version = "0.10.75", features = ["vendored"] }
+tempfile = "3.24.0"
+tokio = { version = "1.48.0", features = ["full"] }
 
 [dev-dependencies]
-tempfile = "3.2"
+tempfile = "3.24.0"
 
 [[bin]]
 name = "git-cz"
 path = "src/main.rs"
-
 
 # The profile that 'cargo dist' will build with
 [profile.dist]
