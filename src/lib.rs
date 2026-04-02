@@ -92,8 +92,19 @@ pub fn perform_commit(repo_path: &Path, full_commit_message: &str) -> Result<(),
     let author_email = config.get_string("user.email")?;
     let sig = Signature::now(&author_name, &author_email)?;
 
-    let head = repo.head()?;
-    let parent_commit = repo.find_commit(head.target().ok_or("Failed to find HEAD target")?)?;
+    // Get the parent commit if it exists (not an initial commit)
+    let parent_commit = match repo.head() {
+        Ok(head) => {
+            let target = head.target().ok_or("Failed to find HEAD target")?;
+            Some(repo.find_commit(target)?)
+        }
+        Err(_) => None,
+    };
+
+    let parents = match &parent_commit {
+        Some(p) => vec![p],
+        None => vec![],
+    };
 
     repo.commit(
         Some("HEAD"),
@@ -101,7 +112,7 @@ pub fn perform_commit(repo_path: &Path, full_commit_message: &str) -> Result<(),
         &sig,
         &full_commit_message,
         &tree,
-        &[&parent_commit],
+        &parents,
     )?;
 
     Ok(())

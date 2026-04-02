@@ -271,3 +271,22 @@ fn test_perform_commit_invalid_path() {
     let commit_message = "This commit should fail";
     perform_commit(invalid_path, commit_message).unwrap();
 }
+#[test]
+fn test_perform_initial_commit() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let repo = Repository::init(temp_dir.path()).unwrap();
+    let mut index = repo.index().unwrap();
+
+    let full_commit_message = "feat: Initial commit";
+
+    std::fs::write(temp_dir.path().join("first.txt"), "First content").unwrap();
+    index.add_path(Path::new("first.txt")).unwrap();
+    index.write().unwrap();
+
+    perform_commit(temp_dir.path(), &full_commit_message).expect("Initial commit should succeed");
+
+    let head = repo.head().expect("HEAD should exist after initial commit");
+    let commit = repo.find_commit(head.target().unwrap()).unwrap();
+    assert_eq!(commit.message().unwrap(), full_commit_message);
+    assert_eq!(commit.parent_count(), 0);
+}

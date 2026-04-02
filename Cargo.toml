@@ -1,8 +1,14 @@
 [package]
 name = "git-commitizen"
+<<<<<<< Updated upstream
 version = "0.1.1"
 edition = "2021"
 authors = ["Jain Ramchurn"]
+=======
+version = "0.2.1"
+edition = "2024"
+authors = ["Pierre Mavro", "Jain Ramchurn"]
+>>>>>>> Stashed changes
 description = "A simple commitizen CLI tool in rust"
 homepage ="https://github.com/k3ii/git-cz"
 repository = "https://github.com/k3ii/git-cz"
@@ -12,6 +18,7 @@ keywords = ["git", "commitizen", "cli", "rust"]
 categories = ["development-tools"]
 
 [dependencies]
+<<<<<<< Updated upstream
 git2 = "0.19.0"
 promkit = "0.4.5"
 openssl = { version = "0.10", features = ["vendored"] }
@@ -19,6 +26,16 @@ tempfile = "3.2"
 
 [dev-dependencies]
 tempfile = "3.2"
+=======
+git2 = "0.20.4"
+promkit = { version = "0.12.1", features = ["query-selector", "confirm", "readline"] }
+openssl = { version = "0.10.76", features = ["vendored"] }
+tempfile = "3.27.0"
+tokio = { version = "1.50.0", features = ["full"] }
+
+[dev-dependencies]
+tempfile = "3.27.0"
+>>>>>>> Stashed changes
 
 [[bin]]
 name = "git-cz"
